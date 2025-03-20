@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> SelfSync </title>
+<link href="https://fonts.cdnfonts.com/css/cool-school" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+body {
+        background: linear-gradient(135deg, #d6b3e6 0%, #c9a4e6 100%);
+        background-color: #d6b3e6;
+        font-family: 'Cool School', sans-serif;
+        margin: 0;    
+        overflow-x: hidden;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+}
+header {       
+        background-color: #f2a6e7;
+        text-align: center;
+        width: 100%;
+        padding: 1rem;
+        color: #fbfbfb;
+        border: 1px solid #333333;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+.navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            top: 0px;
+            background: #a8a1d6;
+            background-blend-mode: darken;
+            background-size: cover;
+            color: white;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-list li {
+            margin-right: 20px;
+        }
+
+        .nav-list li:last-child {
+            margin-right: 0;
+        }
+
+        .nav-list li a {
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            
+        }
+
+        .nav-list li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ee7ea0;
+            /* Change the color on hover */
+        }
+
+        .rightNav {
+            text-align: right;
+        }
+#logo-image {
+     
+        width: 250px; /* Adjust size as needed */
+        height: auto;
+        display: block;
+        margin: 10px auto;
+}
+.container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        margin-top: 50px
+}
+.card {
+        width: 400px;
+        height: 400px;
+        background-color: #FADADD;
+        border-radius: 20px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px; 
+        font-weight: bold;
+        cursor: pointer; 
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease, box-shadoe 0.2s ease;
+        text-decoration: none; 
+        color: black; 
+        padding: 50px;
+        text-align: center;
+        }
+.card:hover {
+    background-color: #5a4ebd;
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.25); /* Soft hover shadow */
+}
+
+.card:active {
+    transform: scale(0.97);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+.card i, {
+    font-size: 40px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+footer {
+    background: #6B4E71;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+</style>
+<body>
+<header> <h1> Mood Tracker </h1> </header>
+<div class="navbar">
+<img id="logo-image" src="Images/logo.png" alt="logo"> 
+
+<nav>
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="habit-tracker.html">Health Tracker</a></li>
+            <li><a href="mood-tracker.html">Mood Tracker</a></li>
+            <li><a href="recommendations.html">Recommendations</a></li>
+        </ul>
+        </nav>
+</div>
+<div class="container">
+    <a href="mood-journal.html" class="card"><i class="fas fa-book-open"></i>Mood Journal</a>
+    <a href="mood-monitor.html" class="card"><i class="fas fa-chart-line"></i>Mood Monitor</a>
+</div>
+ <footer>
+    <p>© 2025 My Well-Being Tracker </p>
+ </footer>
+</body>
+</html>

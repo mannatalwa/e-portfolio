@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.cdnfonts.com/css/cool-school" rel="stylesheet">
+    <title>SelfSync</title>
+    <style>
+        body {
+        background: linear-gradient(135deg, #d6b3e6 0%, #c9a4e6 100%);
+        font-family: 'Cool School', sans-serif;
+        margin: 0;    
+        overflow-x: hidden;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+}
+header {       
+        background-color: #f2a6e7;
+        text-align: center;
+        width: 100%;
+        padding: 1rem;
+        color: #fbfbfb;
+        border: 1px solid #333333;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #a8a1d6;
+        padding: 15px 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-list {
+        display: flex;
+        list-style: none;
+}
+
+.nav-list li {
+        margin-right: 20px;
+}
+
+.nav-list li a {
+        font-weight: 500;
+        padding: 5px 10px;
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        transition: all 0.3s ease;
+}
+
+.nav-list li a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #ee7ea0;
+}
+
+#logo-image {
+        width: 250px;
+        height: auto;
+        display: block;
+        margin: 10px auto;
+}
+
+
+        .notes-container {
+            background-color: #f8e1ff;
+            padding: 15px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        textarea {
+            width: 90%;
+            height: 100px;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #ab7ac1;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .note-item {
+            background: white;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+footer {
+        background: #6B4E71;
+        color: white;
+        text-align: center;
+        padding: 25px;
+        margin-top: 40px;
+        width: 100%;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+    </style>
+</head>
+<body>
+<header> <h1> Mood Journal </h1> </header>
+
+
+    <div class="navbar">
+    <img id="logo-image" src="Images/logo.png" alt="logo"> 
+    <nav>
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="habit-tracker.html">Health Tracker</a></li>
+            <li><a href="mood-tracker.html">Mood Tracker</a></li>
+            <li><a href="recommendations.html">Recommendations</a></li>
+        </ul>
+    </nav>
+</div>
+    
+    <div class="notes-container">
+        <h2>My Notes</h2>
+        <textarea id="noteInput" placeholder="Write your note here..."></textarea>
+        <button id="saveNote">Save Note</button>
+        <ul id="notesList"></ul>
+    </div>
+
+<footer>
+    <p>© 2025 My Well-Being Tracker </p>
+</footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const noteInput = document.getElementById("noteInput");
+            const saveNote = document.getElementById("saveNote");
+            const notesList = document.getElementById("notesList");
+
+            // Load saved notes on page load
+            loadNotes();
+
+            // Save note when button is clicked
+            saveNote.addEventListener("click", () => {
+                let noteText = noteInput.value.trim();
+                if (noteText === "") return;
+
+                let note = {
+                    text: noteText,
+                    date: new Date().toLocaleString()
+                };
+
+                saveNoteToStorage(note);
+                addNoteToDOM(note);
+                noteInput.value = ""; // Clear input
+            });
+
+            // Function to load notes from localStorage
+            function loadNotes() {
+                let notes = JSON.parse(localStorage.getItem("notes")) || [];
+                notes.forEach(note => addNoteToDOM(note));
+            }
+
+            // Function to save note to localStorage
+            function saveNoteToStorage(note) {
+                let notes = JSON.parse(localStorage.getItem("notes")) || [];
+                notes.push(note);
+                localStorage.setItem("notes", JSON.stringify(notes));
+            }
+
+            // Function to add note to the DOM
+            function addNoteToDOM(note) {
+                let li = document.createElement("li");
+                li.classList.add("note-item");
+
+                li.innerHTML = `
+                    <span>${note.text} <br> <small>${note.date}</small></span>
+                    <button class="delete-btn">X</button>
+                `;
+
+                // Delete note when button is clicked
+                li.querySelector(".delete-btn").addEventListener("click", () => {
+                    removeNoteFromStorage(note);
+                    li.remove();
+                });
+
+                notesList.appendChild(li);
+            }
+
+            // Function to remove note from localStorage
+            function removeNoteFromStorage(noteToRemove) {
+                let notes = JSON.parse(localStorage.getItem("notes")) || [];
+                notes = notes.filter(note => note.text !== noteToRemove.text || note.date !== noteToRemove.date);
+                localStorage.setItem("notes", JSON.stringify(notes));
+            }
+        });
+    </script>
+
+</body>
+</html>

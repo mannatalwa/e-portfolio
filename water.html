@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SelfSync</title>
+<link href="https://fonts.cdnfonts.com/css/cool-school" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body {
+        background: linear-gradient(135deg, #d6b3e6 0%, #c9a4e6 100%);
+        font-family: 'Cool School', sans-serif;
+        margin: 0;    
+        overflow-x: hidden;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+}
+header {       
+        background-color: #f2a6e7;
+        text-align: center;
+        width: 100%;
+        padding: 1rem;
+        color: #fbfbfb;
+        border: 1px solid #333333;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #a8a1d6;
+        padding: 15px 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-list {
+        display: flex;
+        list-style: none;
+}
+
+.nav-list li {
+        margin-right: 20px;
+}
+
+.nav-list li a {
+        font-weight: 500;
+        padding: 5px 10px;
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        transition: all 0.3s ease;
+}
+
+.nav-list li a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #ee7ea0;
+}
+
+#logo-image {
+        width: 250px;
+        height: auto;
+        display: block;
+        margin: 10px auto;
+}
+
+h1 {
+        margin: 10px;
+        font-size: 36px;
+}
+
+h2 {
+        margin: 5px;
+        font-size: 24px;
+}
+
+#monthControl {
+        margin: 10px;
+        font-size: 18px;
+}
+
+.calendarDiv {
+        background-color: white;
+        border-radius: 10px;
+        padding: 10px;
+        width: 300px;
+        margin: auto;
+}
+
+.calendarHeading {
+        font-size: 20px;
+        margin-bottom: 10px;
+        background-color: #cbc3e3;
+        padding: 5px;
+        border-radius: 10px;
+}
+
+/* Style for the dropdown */
+#sleepGoal {
+        font-size: 18px;
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #f7d3e1;
+}
+
+.calendarContent {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+}
+
+.day {
+        width: 30px;
+        margin: 3px;
+        padding: 10px;
+        font-size: 15px;
+        text-align: center;
+        border-radius: 20px;
+        background-color: #cbc3e3;
+        cursor: pointer;
+}
+#resetButton {
+    padding: 10px 20px; /* Reduced padding */
+    font-size: 16px; /* Smaller text */
+    background-color: #f7d3e1;
+    color: black;
+    border: none;
+    border-radius: 10px; /* Less rounded */
+    cursor: pointer;
+    width: auto; /* Auto size */
+    height: auto; /* Auto height */
+    text-align: center;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+#resetButton:hover {
+    background-color: #5a4ebd;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+#resetButton:active {
+    transform: scale(0.97);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+#prevMonth, #nextMonth {
+    padding: 10px 20px; /* Similar padding to reset button */
+    font-size: 16px;
+    background-color: #f7d3e1;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Hover & Click Effects */
+#prevMonth:hover, #nextMonth:hover {
+    background-color: #5a4ebd;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+#prevMonth:active, #nextMonth:active {
+    transform: scale(0.97);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+        background: #6B4E71;
+        color: white;
+        text-align: center;
+        padding: 25px;
+        margin-top: 40px;
+        width: 100%;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+.how-to-use {
+    position: absolute; /* Keeps it in place */
+    left: 10%; /* Adjusts the position */
+    top: 70%; /* Centers it vertically */
+    transform: translateY(-50%);
+    width: 250px; /* Adjust as needed */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    text-align: left;
+}
+#chart-container {
+    width: 30%;
+    height: 300px;
+    padding: 20px;
+    position: absolute; /* Keeps it in place */
+    right: 5%; /* Adjusts the position */
+    top: 70%; /* Centers it vertically */
+    transform: translateY(-50%);
+
+}
+
+
+</style>
+</head>
+<body>
+<header> <h1> Hydration </h1> </header>
+
+<div class="navbar">
+    <img id="logo-image" src="Images/logo.png" alt="logo"> 
+    <nav>
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="habit-tracker.html">Health Tracker</a></li>
+            <li><a href="mood-tracker.html">Mood Tracker</a></li>
+            <li><a href="recommendations.html">Recommendations</a></li>
+        </ul>
+    </nav>
+</div>
+
+<h2 id="subtitle">Track Your Progress!</h2>
+
+<div id="monthControl">
+    <button id="prevMonth">Previous Month</button>
+    <span id="currentMonth"></span>
+    <button id="nextMonth">Next Month</button>
+</div>
+
+<div class="calendarDiv">
+    <div class="calendarHeading">
+        <label for="sleepGoal">Water Intake Goal:</label>
+        <select id="sleepGoal">
+            <option value="1" selected>1 Litre</option>
+            <option value="2">2 Litres</option>
+            <option value="3">3 Litres</option>
+            <option value="4">4 Litres</option>
+            <option value="5">5 Litres</option>
+        </select>
+        of water
+    </div>
+    <div class="calendarContent" id="habitContent"></div>
+</div>
+<div class="how-to-use">
+    <h2>How to Use</h2>
+<p> Besides is a cute calendar to help you track you water intake! You can adjust the number of litres from 1-5 using the drop-down menu,
+and click on the little buttons which represent the dates of a month! Try to stick to the habit till the end of the month for a little surprise! No cheating allowed!</p>
+    <ul>
+        <li>Use the drop-down to set your hydration goal.</li>
+        <li>Click on a date to mark it as completed.</li>
+        <li>Track your progress with the completed days counter.</li>
+        <li>Use "Previous Month" and "Next Month" buttons to navigate.</li>
+        <li>Press "Reset" to clear all data.</li>
+    </ul>
+</div>
+<div id="chart-container">
+    <canvas id="habitProgressChart"></canvas>
+</div>
+
+<button id="resetButton">Reset</button>
+
+<footer>
+    <p>© 2025 My Well-Being Tracker </p>
+</footer>
+
+<script>
+const date = new Date();
+let currentMonth = date.getMonth();
+let currentYear = date.getFullYear();
+let completedDays = 0;
+let habitData = new Array(31).fill(0); // Track completion (0 = Not Done, 1 = Done)
+
+const monthNames = [
+  "January", "February", "March", "April", "May", "June", 
+  "July", "August", "September", "October", "November", "December"
+];
+
+const daysInTheMonth = (month, year) => new Date(year, month + 1, 0).getDate();
+
+const updateMonthDisplay = () => {
+    document.getElementById("currentMonth").innerText = `${monthNames[currentMonth]} ${currentYear}`;
+};
+
+const createCalendar = () => {
+    const habitContent = document.getElementById("habitContent");
+    habitContent.innerHTML = "";
+    let totalDays = daysInTheMonth(currentMonth, currentYear);
+
+    for (let i = 1; i <= totalDays; i++) {
+        const dayButton = document.createElement("div");
+        dayButton.classList.add("day");
+        dayButton.innerText = i;
+
+        if (habitData[i - 1] === 1) {
+            dayButton.style.backgroundColor = "#4CAF50"; // Green for completed
+        } else {
+            dayButton.style.backgroundColor = ""; // Default color
+        }
+
+        dayButton.addEventListener("click", () => {
+            habitData[i - 1] = habitData[i - 1] === 1 ? 0 : 1; // Toggle
+            completedDays = habitData.reduce((acc, val) => acc + val, 0);
+            updateChart();
+            createCalendar(); // Refresh UI
+        });
+
+        habitContent.appendChild(dayButton);
+    }
+};
+function checkCompletion() {
+    if (habitData.every(day => day === 1)) {
+        alert("Congratulations! You have completed all days of this month!");
+    }
+}
+
+document.getElementById("habitContent").addEventListener("click", (event) => {
+    if (event.target.classList.contains("day")) {
+        let index = parseInt(event.target.dataset.index, 10);
+        habitData[index] = 1;
+        event.target.style.backgroundColor = "#5a4ebd"; // Change color to indicate completion
+        checkCompletion(); // Check if all days are completed
+    }
+});
+
+// Initialize Chart.js
+const ctx = document.getElementById("habitProgressChart").getContext("2d");
+let habitChart = new Chart(ctx, {
+    type: "line",
+    data: {
+        labels: Array.from({ length: 31 }, (_, i) => i + 1), // Days of month
+        datasets: [{
+            label: "Completed Days",
+            data: habitData,
+            borderColor: "#5a4ebd",
+            backgroundColor: "rgba(90, 78, 189, 0.2)",
+            borderWidth: 2,
+            fill: true,
+            tension: 0.3  // Smooth curve
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            x: { title: { display: true, text: "Days" } },
+            y: { title: { display: true, text: "Completion (1 = Done, 0 = Not Done)" }, min: 0, max: 1 }
+        }
+    }
+});
+
+// Update Chart dynamically
+const updateChart = () => {
+    habitChart.data.datasets[0].data = habitData;
+    habitChart.update();
+};
+
+// Navigation buttons
+document.getElementById("prevMonth").addEventListener("click", () => {
+    currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+    if (currentMonth === 11) currentYear--;
+    habitData.fill(0); // Reset data for new month
+    completedDays = 0;
+    updateMonthDisplay();
+    createCalendar();
+    updateChart();
+});
+
+document.getElementById("nextMonth").addEventListener("click", () => {
+    currentMonth = (currentMonth === 11) ? 0 : currentMonth + 1;
+    if (currentMonth === 0) currentYear++;
+    habitData.fill(0);
+    completedDays = 0;
+    updateMonthDisplay();
+    createCalendar();
+    updateChart();
+});
+
+// Reset button
+document.getElementById("resetButton").addEventListener("click", () => {
+    habitData.fill(0);
+    completedDays = 0;
+    createCalendar();
+    updateChart();
+});
+
+// Initialize page
+updateMonthDisplay();
+createCalendar();
+updateChart();
+
+</script>
+</body>
+</html>

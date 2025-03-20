@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> SelfSync </title>
+<link href="https://fonts.cdnfonts.com/css/cool-school" rel="stylesheet">
+<style>
+    body {
+        background: linear-gradient(135deg, #d6b3e6 0%, #c9a4e6 100%);
+        background-color: #d6b3e6;
+        font-family: 'Cool School', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: hidden;
+
+    }
+    header {
+        background-color: #f2a6e7;
+        text-align: center;
+        width: 100%;
+        padding: 1rem;
+        color: #fbfbfb;
+        border: 1px solid #333333;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        margin: 0;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        padding: 20px;
+        max-width: 800px;
+        margin: 40px auto;
+    }
+    .box {
+        flex: 1;
+        max-width: 550px;
+        padding: 30px;
+        background-color: #f7d3e1;
+        color: #555555;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        line-height: 1.7;
+
+
+}
+
+   .box:hover {
+}
+
+            
+    h2 {
+        color: #6B4E71;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    p {
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+    h5 {
+        font-weight: normal;
+}
+/* Main container for layout */
+.main-container {
+    position: relative;
+    text-align: center; /* Centers the content */
+}
+
+/* Container for all three boxes */
+.box-container {
+    display: flex; /* Arrange the items side by side */
+    justify-content: center; /* Centers the boxes */
+    gap: 20px; /* Adds space between the boxes */
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+/* Style for the boxes */
+.next-box {
+    width: 150px;
+    height: 100px;
+    padding: 10px;
+    background-color: #e1c6d7;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style for buttons */
+.button {
+    background-color: #f7d3e1;
+    color: #555555;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.button:hover {
+    transform: scale(1.05); 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #e1c6d7;
+}
+.navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            top: 0px;
+            background: #a8a1d6;
+            background-blend-mode: darken;
+            background-size: cover;
+            color: white;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-list li {
+            margin-right: 20px;
+        }
+
+        .nav-list li:last-child {
+            margin-right: 0;
+        }
+
+        .nav-list li a {
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-list li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ee7ea0;
+            /* Change the color on hover */
+        }
+
+        .rightNav {
+            text-align: right;
+        }
+.HomeImage {
+            position: absolute;
+            width: 200px; 
+            height: auto; 
+            top: 70%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+}
+
+.HomeImage:hover{
+opacity: 1;
+}
+#left-image {
+margin-top: 20px;
+left: -20px;
+width: 350px;
+}
+#right-image {
+right: 80px;
+}
+footer {
+    background: #6B4E71;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+#logo-image {
+     
+        width: 250px; /* Adjust size as needed */
+        height: auto;
+        display: block;
+        margin: 10px auto;        
+}
+</style>
+</head>
+<body>
+<header>
+<h1>SelfSync</h1>
+</header>
+<div class="navbar">
+<img id="logo-image" src="Images/logo.png" alt="logo"> 
+
+<nav>
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="habit-tracker.html">Health Tracker</a></li>
+            <li><a href="mood-tracker.html">Mood Tracker</a></li>
+            <li><a href="recommendations.html">Recommendations</a></li>
+        </ul>
+        </nav>
+</div>
+
+<main>
+<div class="container">
+<img id="left-image" class="HomeImage" src="Images/download.png" alt="LeftImage">
+  <div class="box">
+         <h2> Welcome to Your Digital Wellness Tracker! </h2>
+       <p> <h5>Life as a busy teen can be overwhelming—balancing school, hobbies, friends, and self-care. That’s why we created a space just for you: a habit tracker that supports both your physical and mental well-being. </p>
+
+<p>With our Healthy Habit Tracker, you can build routines that energize your body—like staying hydrated, sleeping well, or hitting fitness goals. And our Mood Tracker helps you reflect on emotions and spot patterns to take charge of your mental health.</p> 
+
+<p>Think of it as your personalized journal—smarter, faster, and always with you. Let’s build a healthier, happier you—one habit at a time!</h5>  </p>
+  </div>
+<div class="box">
+     <h2> A Friendly Reminder Before You Begin</h2>
+   <p><h5>Starting your fitness journey is exciting, but it’s important to take things at your own pace. With our tracker, you can customize your goals—choose the habits you want to build and set the duration that works best for you.</p>
+
+<p>When you hit your goal for the number of days you’ve set, we’ll celebrate your progress with a fun little surprise!But remember, the true reward is the effort you’re putting in to better yourself.</p>
+
+<p>And hey, it’s okay to miss a day or two—what matters most is your commitment to showing up for yourself. Consistency, not perfection, is the key! You’ve got this! </h5> </p>
+</div>
+<img id="right-image" class="HomeImage" src="Images/download (1).png" alt="RightImage"> 
+</div>
+
+<div class="main-container">
+
+
+    <!-- Container for all three boxes -->
+    <div class="box-container">
+        <!-- First box: Start tracking now! -->
+        <div class="next-box">
+            <p>Start tracking now!<br><svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.75 6.75L19.25 12L13.75 17.25"></path>
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 12H4.75"></path>
+</svg>
+</p>
+        </div>
+        
+        <!-- Second and third boxes: buttons with hyperlinks -->
+        <a href="habit-tracker.html" class="box button">Healthy Habits Tracker</a>
+        <a href="mood-tracker.html" class="box button">Mood Tracker</a>
+    </div>
+
+</div>
+</main>
+<footer>
+    <p>© 2025 My Well-Being Tracker </p>
+</footer>
+
+
+</body>
+</html>
